@@ -20,3 +20,7 @@ export const registerValidation = [
       return true;
     }),
 ];
+
+export const urlValidation = [
+  check("originalUrl", "Please provide a valid URL").isURL(),
+];
