@@ -12,6 +12,11 @@ export const shortUrlService = async (req) => {
   const { originalUrl } = req.body;
 
   try {
+    const existingUrl = await urlModel.findOne({ originalUrl });
+
+    if (existingUrl) {
+      return { status: true, url: existingUrl };
+    }
     const shortId = shortid.generate();
     const newUrl = await urlModel.create({ shortId, originalUrl });
     return { status: true, url: newUrl };
