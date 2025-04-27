@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import "./UrlShortner.css";
-
 const UrlShortner = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
@@ -37,7 +35,7 @@ const UrlShortner = () => {
         return;
       }
       const totalvisit = data?.url?.totalClicks;
-      setShortUrl("http://localhost:3000/url/" + data?.url?.shortId);
+      setShortUrl("/url/" + data?.url?.shortId);
       setTotalClicks(totalvisit.length); // Assuming backend returns { shortenedUrl: "..." }
     } catch (err) {
       setError("Failed to shorten URL. Please try again.");
@@ -98,7 +96,7 @@ const UrlShortner = () => {
       </div>
 
       <footer className="footer">
-        Built with <span className="footer-heart">♥</span> by Chomu ka Dumboo
+        Built with <span className="footer-heart">♥</span> by Atul Shukla
       </footer>
     </div>
   );

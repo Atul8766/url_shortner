@@ -3,8 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useLocation,
-  useNavigate,
 } from "react-router-dom";
 import UrlShortner from "../pages/UrlShortner";
 const AppRoute = () => {
