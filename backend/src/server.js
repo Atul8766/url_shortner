@@ -9,9 +9,6 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 
 // Connect to database
@@ -25,12 +22,6 @@ app.use(cors());
 // API routes
 app.use("/api", route);
 app.use("/url", urlRoute);
-
-// Serve static files and catch-all route for frontend
-app.use(express.static(path.join(__dirname, "../../../frontend/build")));
-app.get("/*", (req, res) =>
-  res.sendFile(path.join(__dirname, "../../../frontend/build/index.html"))
-);
 
 // Start server
 const PORT = process.env.PORT || 5000;
