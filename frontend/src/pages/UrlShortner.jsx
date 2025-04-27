@@ -1,19 +1,23 @@
 import React, { useState } from "react";
+
 const UrlShortner = () => {
   const [url, setUrl] = useState("");
   const [shortUrl, setShortUrl] = useState("");
   const [totalClicks, setTotalClicks] = useState(0);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false); // Added loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setShortUrl("");
     setCopied(false);
+    setLoading(true); // Set loading to true when the request starts
 
     if (!url) {
       setError("Please enter a URL.");
+      setLoading(false); // Reset loading if there's an error
       return;
     }
 
@@ -32,6 +36,7 @@ const UrlShortner = () => {
         setError(
           data?.errors[0]?.msg || "Failed to shorten URL. Please try again."
         );
+        setLoading(false); // Reset loading on error
         return;
       }
       const totalvisit = data?.url?.totalClicks;
@@ -39,6 +44,8 @@ const UrlShortner = () => {
       setTotalClicks(totalvisit.length); // Assuming backend returns { shortenedUrl: "..." }
     } catch (err) {
       setError("Failed to shorten URL. Please try again.");
+    } finally {
+      setLoading(false); // Reset loading when the request completes (success or error)
     }
   };
 
@@ -62,8 +69,16 @@ const UrlShortner = () => {
               placeholder="Enter your URL"
               className="input"
             />
-            <button onClick={handleSubmit} className="shorten-button">
-              Shorten
+            <button
+              onClick={handleSubmit}
+              className="shorten-button"
+              disabled={loading} // Disable the button while loading
+            >
+              {loading ? (
+                <span className="loader"></span> // Show loader when loading
+              ) : (
+                "Shorten"
+              )}
             </button>
           </div>
           {error && <p className="error">{error}</p>}
