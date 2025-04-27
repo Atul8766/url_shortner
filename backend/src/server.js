@@ -27,9 +27,9 @@ app.use("/api", route);
 app.use("/url", urlRoute);
 
 // Serve static files and catch-all route for frontend
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../../../frontend/build")));
 app.get("/*", (req, res) =>
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"))
+  res.sendFile(path.join(__dirname, "../../../frontend/build/index.html"))
 );
 
 // Start server
