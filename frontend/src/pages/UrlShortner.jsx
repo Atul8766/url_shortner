@@ -19,7 +19,7 @@ const UrlShortner = () => {
 
     try {
       // Replace with your backend URL
-      const response = await fetch("http://localhost:3000/url/create", {
+      const response = await fetch("https://url-shortner-954u.onrender.com/url/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const UrlShortner = () => {
         return;
       }
       const totalvisit = data?.url?.totalClicks;
-      setShortUrl("/url/" + data?.url?.shortId);
+      setShortUrl("https://url-shortner-954u.onrender.com/url/" + data?.url?.shortId);
       setTotalClicks(totalvisit.length); // Assuming backend returns { shortenedUrl: "..." }
     } catch (err) {
       setError("Failed to shorten URL. Please try again.");
